@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',function(){
+/*Route::get('/',function(){
     return view("home.home");
-})-> name("dashboard");
+})-> name("dashboard");*/
 
-Route::prefix('dashboard')->group(function(){
+Route::get("/","DashboardController@dashboard")-> name("dashboard");
+/*Route::prefix('dashboard')->group(function(){
    Route::get("/","DashboardController@index");
-});//ruta de tipo recurso:se le especifica un nombre y una ruta de la cual ase uso de un contralador.
+})*///ruta de tipo recurso:se le especifica un nombre y una ruta de la cual ase uso de un contralador.
 
-Route::resource("Abaut","AboutController");
+Route::resource("About","AboutController");
