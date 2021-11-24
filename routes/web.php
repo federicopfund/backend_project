@@ -1,6 +1,8 @@
 <?php
-
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +25,11 @@ Route::get("/","DashboardController@dashboard")-> name("dashboard");
 })*///ruta de tipo recurso:se le especifica un nombre y una ruta de la cual ase uso de un contralador.
 
 Route::resource("About","AboutController");
+
+
+
+
+
+Route::prefix('About')->group(function(){
+    Route::post('search', "AboutController@search")->name("About.search");//
+});

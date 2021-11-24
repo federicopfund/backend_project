@@ -1,31 +1,34 @@
 @extends('base')
 @section('title') About Create @endsection
 @section('content')
-<div
-    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2"{{ "About Create" }}</h1>
-</div>
-<form action="{{ route("About.store")}}" method="post">
-    {{ csrf_field() }}
-    <div class="mb-3">
-        <label for="name" class="form-label">Nombre</label>
-        <input type="text" id="name" class="form-control" placeholder="name">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">About Create</h1>
     </div>
-    <div class="mb-3">
-        <label for="name" class="form-label">Email</label>
-        <input type="email" id="email" class="form-control" placeholder="email">
-    </div>
-    <div class="mb-3">
-        <label for="name" class="form-label">Telefono</label>
-        <input type="phone" id="phone" class="form-control" placeholder="phone">
-    </div>
-    <div class="mb-3">
-        <label for="name" class="form-label">Mensaje</label>
-        <input type="message" id="message" class="form-control" placeholder="message">
-    </div>
-    <button type="submit" class="btn btn-primary">Guardar</button>
-   
-</form>
 
-    
+    <form action="{{ route("About.store") }}" method="post">
+        {{ csrf_field() }}
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="name" name="name">
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email">
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label">Telefono</label>
+          <input type="phone" class="form-control" id="phone" name="phone">
+        </div>
+
+        <div class="mb-3">
+            <label for="messege" class="form-label">Mensaje</label>
+            <textarea name="messege" class="form-control" id="messege" cols="30" rows="10"></textarea>
+          </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+
+
 @endsection

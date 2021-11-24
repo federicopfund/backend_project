@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 
+
+use App\Mail\AboutMail;
+use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\Mail;
+
+
 use App\About;//acemso la llamada al modelo
 use Illuminate\Http\Request;
 
@@ -37,7 +43,12 @@ class AboutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         //dump($request->All()); //imprimo en pantalla lo que se trae del formulario
+         $data = $request->except("_token"); //elimina el elemento token que no es necesario
+         //dump($data); muestra informacion sin token
+         //die(); detiene la ejecucuion
+         About::insert($data);
+         return redirect()->route("About.index");
     }
 
     /**
@@ -59,9 +70,18 @@ class AboutController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = About::findOrFail($id);
+        return view("about.edit")->with(["about" =>$data]);
     }
-
+    public function search(Request $request)
+    {
+       $search = $request->input('search');
+       $result = About::select()
+       ->where("name", "like", "%$search%")
+       ->orwhere("email", "like", "%$search%")
+       ->get();
+       return view("about.index")->with(["abouts" => $result]);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -71,7 +91,9 @@ class AboutController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data =$request->except("_token", "_method");
+        About::where("id","=",$id)->update($data);
+        return redirect()->route("About.index");
     }
 
     /**
@@ -82,6 +104,19 @@ class AboutController extends Controller
      */
     public function destroy($id)
     {
-        //
+        About::destroy($id);
+        return redirect()->route("About.index");
+    }
+
+    public function saveApi(Request $request)
+    {
+        $data = $request->all();
+        try {
+
+            About::insert($data);
+        } catch (\Throwable $th) {
+            return response()->json(["message"=> "Se genero un error {$th->getMessage()}"],404);
+        }
+        return response()->json(["message"=> "Se genero un error "],201);
     }
 }
