@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\About;//acemso la llamada al modelo
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -12,8 +14,9 @@ class AboutController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   //crear una variable a esa variable la defino como un arreglo dentro del arrreglo le coloco el parametro arreglp a ese parametro le eceguro una odentidad
+        $repo["abouts"] = About::all();//all --> a todo la instancia de Eloquents para SQL.
+        return view("about.index",$repo);
     }
 
     /**
@@ -23,7 +26,7 @@ class AboutController extends Controller
      */
     public function create()
     {
-        //
+        return View("about.create");
     }
 
     /**
