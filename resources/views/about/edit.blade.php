@@ -3,7 +3,7 @@
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">About Edit</h1>
+        <h1 class="h2">{{"About Edit"}}</h1>
     </div>
 
     <form action="{{ route("About.update",$about->id) }}" method="POST">
@@ -25,8 +25,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="message" class="form-label">Mensaje</label>
-            <textarea name="message" class="form-control" id="message" cols="30" rows="10">{{ $about->message }}</textarea>
+            <label for="messege" class="form-label">Mensaje</label>
+            <textarea name="messege" class="form-control" id="messege" cols="30" rows="10">{{ $about->message }}</textarea>
           </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
       </form>
